@@ -1,0 +1,74 @@
+*{
+    box-sizing: border-box;
+}
+.page{
+    height: 100vh;
+    width: 100vw;
+    background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 60, 0.73)), url("../images/trinityCampus.jpg");
+    font-family: 'Sen', sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.loginMenu{
+    background-color: white;
+    width: 30%;
+    height: 35em;
+    box-shadow: 1px 1px 15px rgb(107, 107, 107);
+    padding: 1em;
+}
+.loginMenuHeader{
+    text-align: center;
+    font-family: 'Domine', serif;
+    margin-bottom: 4em;
+    margin-top: 1em;
+}
+.loginMenuHeader .applicationName{
+    margin-bottom: 1em;
+    color: maroon;
+}
+.loginMenuHeader h1{
+    font-size: 1.7em;
+}
+.loginMenuBody{
+    position: relative;
+    height: 20em;
+}
+form{
+    height: 10em;
+}
+dl{
+    margin-top: 3em;
+}
+dd{
+    margin-top: 3em;
+    padding: .5em;
+    border-radius: 2rem;
+}
+dd.info{
+    visibility: hidden;
+}
+input{
+    width: 100%;
+    margin-top: .5em;
+    margin-bottom: 1.5em;
+    height: 2em;
+    border: none;
+    background-color: #EFEFEF;
+}
+button{
+    width: 100%;
+    padding: 1em;
+    background-color: maroon;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    border: none;
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+button:hover{
+    background-color: rgb(160, 4, 4);
+}

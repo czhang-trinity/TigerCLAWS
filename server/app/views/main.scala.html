@@ -1,0 +1,23 @@
+@(title: String, cssSheet: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>TigerCLAWS | @title</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned(cssSheet)">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/reset.css")">
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/tigericon.png")">
+    <link href="https://fonts.googleapis.com/css?family=Domine|Sen&display=swap" rel="stylesheet">
+
+
+    <!-- Libraries for React -->
+    <!-- <script src="https://unpkg.com/react@@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@@16/umd/react-dom.development.js" crossorigin></script> -->
+  </head>
+  <body>
+    @content
+    <!-- @scalajs.html.scripts("client", routes.Assets.versioned(_).toString, name => getClass.getResource(s"/public/$name") != null) -->
+  </body>
+</html>
