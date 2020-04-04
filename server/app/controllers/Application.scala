@@ -17,8 +17,10 @@ class Application @Inject() (cc: MessagesControllerComponents) extends MessagesA
       "Password" -> text()
     )(LoginData.apply)(LoginData.unapply)
   )
+
   def login = Action{ implicit request =>
     Ok(views.html.login(loginForm))
   }
+  
   def validateLogin = TODO
 }
