@@ -57,7 +57,7 @@ CREATE TABLE course (
     credit_hour int4 Not NULL,
     academic_level int4 NOT NULL,
     course_number char(4) NOT NULL,
-    department_id int4 REFERENCES deparment(id) ON DELETE CASCADE,
+    department_id int4 NOT NULL REFERENCES deparment(id) ON DELETE CASCADE,
     deleted BOOLEAN NOT NULL
 );
 

@@ -25,19 +25,19 @@ trait Tables {
    *  @param creditHour Database column credit_hour SqlType(int4)
    *  @param academicLevel Database column academic_level SqlType(int4)
    *  @param courseNumber Database column course_number SqlType(bpchar), Length(4,false)
-   *  @param departmentId Database column department_id SqlType(int4), Default(None)
+   *  @param departmentId Database column department_id SqlType(int4)
    *  @param deleted Database column deleted SqlType(bool) */
-  case class CourseRow(id: Int, description: String, title: String, creditHour: Int, academicLevel: Int, courseNumber: String, departmentId: Option[Int] = None, deleted: Boolean)
+  case class CourseRow(id: Int, description: String, title: String, creditHour: Int, academicLevel: Int, courseNumber: String, departmentId: Int, deleted: Boolean)
   /** GetResult implicit for fetching CourseRow objects using plain SQL queries */
-  implicit def GetResultCourseRow(implicit e0: GR[Int], e1: GR[String], e2: GR[Option[Int]], e3: GR[Boolean]): GR[CourseRow] = GR{
+  implicit def GetResultCourseRow(implicit e0: GR[Int], e1: GR[String], e2: GR[Boolean]): GR[CourseRow] = GR{
     prs => import prs._
-    CourseRow.tupled((<<[Int], <<[String], <<[String], <<[Int], <<[Int], <<[String], <<?[Int], <<[Boolean]))
+    CourseRow.tupled((<<[Int], <<[String], <<[String], <<[Int], <<[Int], <<[String], <<[Int], <<[Boolean]))
   }
   /** Table description of table course. Objects of this class serve as prototypes for rows in queries. */
   class Course(_tableTag: Tag) extends profile.api.Table[CourseRow](_tableTag, "course") {
     def * = (id, description, title, creditHour, academicLevel, courseNumber, departmentId, deleted) <> (CourseRow.tupled, CourseRow.unapply)
     /** Maps whole row to an option. Useful for outer joins. */
-    def ? = ((Rep.Some(id), Rep.Some(description), Rep.Some(title), Rep.Some(creditHour), Rep.Some(academicLevel), Rep.Some(courseNumber), departmentId, Rep.Some(deleted))).shaped.<>({r=>import r._; _1.map(_=> CourseRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get, _6.get, _7, _8.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
+    def ? = ((Rep.Some(id), Rep.Some(description), Rep.Some(title), Rep.Some(creditHour), Rep.Some(academicLevel), Rep.Some(courseNumber), Rep.Some(departmentId), Rep.Some(deleted))).shaped.<>({r=>import r._; _1.map(_=> CourseRow.tupled((_1.get, _2.get, _3.get, _4.get, _5.get, _6.get, _7.get, _8.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
     /** Database column id SqlType(serial), AutoInc, PrimaryKey */
     val id: Rep[Int] = column[Int]("id", O.AutoInc, O.PrimaryKey)
@@ -51,13 +51,13 @@ trait Tables {
     val academicLevel: Rep[Int] = column[Int]("academic_level")
     /** Database column course_number SqlType(bpchar), Length(4,false) */
     val courseNumber: Rep[String] = column[String]("course_number", O.Length(4,varying=false))
-    /** Database column department_id SqlType(int4), Default(None) */
-    val departmentId: Rep[Option[Int]] = column[Option[Int]]("department_id", O.Default(None))
+    /** Database column department_id SqlType(int4) */
+    val departmentId: Rep[Int] = column[Int]("department_id")
     /** Database column deleted SqlType(bool) */
     val deleted: Rep[Boolean] = column[Boolean]("deleted")
 
     /** Foreign key referencing Deparment (database name course_department_id_fkey) */
-    lazy val deparmentFk = foreignKey("course_department_id_fkey", departmentId, Deparment)(r => Rep.Some(r.id), onUpdate=ForeignKeyAction.NoAction, onDelete=ForeignKeyAction.Cascade)
+    lazy val deparmentFk = foreignKey("course_department_id_fkey", departmentId, Deparment)(r => r.id, onUpdate=ForeignKeyAction.NoAction, onDelete=ForeignKeyAction.Cascade)
   }
   /** Collection-like TableQuery object for table Course */
   lazy val Course = new TableQuery(tag => new Course(tag))
