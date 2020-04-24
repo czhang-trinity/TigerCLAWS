@@ -5,6 +5,7 @@
 # Home page
 GET        /                             controllers.Application.login
 POST       /validateLogin                controllers.Application.validateLogin
+GET        /addCourse                    controllers.Application.addCourse
 
 # Prefix must match `play.assets.urlPrefix`
 GET        /assets/*file                 controllers.Assets.at(file)
